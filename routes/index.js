@@ -1,3 +1,4 @@
+// main entry points for all routes (including api)
 const router = require('express').Router();
 const apiRoutes = require('./api');
 
