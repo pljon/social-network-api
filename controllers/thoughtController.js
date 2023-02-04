@@ -11,7 +11,7 @@ module.exports = {
           console.log(thought); // log thoughts
           res.json(thought); // send thoughts as json
         })
-        .catch((err) => res.status(400).json(err)) // if error, send 400 error
+        .catch((err) => res.status(500).json(err)) // if error, send 500 error
     );
   },
 
@@ -51,7 +51,7 @@ module.exports = {
                 .json({ message: "No thought found with this id!" }) // send 404 error
             : res.json(thought) // respond with thought data
       )
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   // update thought
@@ -70,7 +70,7 @@ module.exports = {
                 .json({ message: "No thought found with this id!" }) // send 404 error
             : res.json(thought) // respond with thought data
       )
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   // delete thought
@@ -92,6 +92,6 @@ module.exports = {
             })
           : res.json(user); // respond with user data with thought removed from thoughts array
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 };
