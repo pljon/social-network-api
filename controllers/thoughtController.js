@@ -94,4 +94,40 @@ module.exports = {
       })
       .catch((err) => res.status(500).json(err));
   },
+
+  // create reaction
+  createReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId }, // find thought by id in params object
+      { $addToSet: { reactions: req.body } }, // add new reaction to reactions array
+      { runValidators: true, new: true } // run validators and respond with new document
+    )
+      .then(
+        (thought) =>
+          !thought // if no thought is found
+            ? res
+                .status(404)
+                .json({ message: "No thought found with this id!" }) // send 404 error
+            : res.json(thought) // respond with thought data
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // delete reaction
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId }, // find thought by id in params object
+      { $pull: { reactions: { reactionId: req.params.reactionId } } }, // pull reaction by id from reactions array
+      { runValidators: true, new: true } // respond with new document
+    )
+      .then(
+        (thought) =>
+          !thought // if no thought is found
+            ? res
+                .status(404)
+                .json({ message: "No thought found with this id!" }) // send 404 error
+            : res.json(thought) // respond with thought data
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
