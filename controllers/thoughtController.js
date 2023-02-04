@@ -3,16 +3,14 @@ const { Thought, User } = require("../models");
 module.exports = {
   // get all thoughts
   getThought(req, res) {
-    Thought.find(
-      // find all thoughts
-      {}
-        .then((thought) => {
-          // then send thoughts as json
-          console.log(thought); // log thoughts
-          res.json(thought); // send thoughts as json
-        })
-        .catch((err) => res.status(500).json(err)) // if error, send 500 error
-    );
+    // find all thoughts
+    Thought.find({})
+      .then((thought) => {
+        // then send thoughts as json
+        console.log(thought); // log thoughts
+        res.json(thought); // send thoughts as json
+      })
+      .catch((err) => res.status(500).json(err)); // if error, send 500 error
   },
 
   // get single thought by id
